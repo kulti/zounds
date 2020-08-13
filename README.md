@@ -1,5 +1,6 @@
 # Zounds
 
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/kulti/zounds)](https://pkg.go.dev/github.com/kulti/zounds)
 ![CI](https://github.com/kulti/zounds/workflows/CI/badge.svg)
 [![Coverage](https://coveralls.io/repos/github/kulti/zounds/badge.svg?branch=master)](https://coveralls.io/github/kulti/zounds?branch=master)
 
