@@ -19,6 +19,6 @@ for p in ${PACKAGES}; do
 done
 
 IFS=${IFS_BACKUP}
-go test -v -mod=vendor -cover -covermode=atomic -coverprofile=coverage.txt ${ALL_PACKAGES} | sed -e '/testing: warning: no tests to run/{N;N;d;}'
+go test -v -cover -covermode=atomic -coverprofile=coverage.txt ${ALL_PACKAGES} | sed -e '/testing: warning: no tests to run/{N;N;d;}'
 
 echo "${ALL_PACKAGES}"
