@@ -8,6 +8,7 @@ import (
 	gomock "github.com/golang/mock/gomock"
 	image "image"
 	reflect "reflect"
+	time "time"
 )
 
 // MockStaticNode is a mock of StaticNode interface
@@ -57,4 +58,152 @@ func (m *MockStaticNode) Draw() {
 func (mr *MockStaticNodeMockRecorder) Draw() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Draw", reflect.TypeOf((*MockStaticNode)(nil).Draw))
+}
+
+// MockDynamicNode is a mock of DynamicNode interface
+type MockDynamicNode struct {
+	ctrl     *gomock.Controller
+	recorder *MockDynamicNodeMockRecorder
+}
+
+// MockDynamicNodeMockRecorder is the mock recorder for MockDynamicNode
+type MockDynamicNodeMockRecorder struct {
+	mock *MockDynamicNode
+}
+
+// NewMockDynamicNode creates a new mock instance
+func NewMockDynamicNode(ctrl *gomock.Controller) *MockDynamicNode {
+	mock := &MockDynamicNode{ctrl: ctrl}
+	mock.recorder = &MockDynamicNodeMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use
+func (m *MockDynamicNode) EXPECT() *MockDynamicNodeMockRecorder {
+	return m.recorder
+}
+
+// Bounds mocks base method
+func (m *MockDynamicNode) Bounds() image.Rectangle {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Bounds")
+	ret0, _ := ret[0].(image.Rectangle)
+	return ret0
+}
+
+// Bounds indicates an expected call of Bounds
+func (mr *MockDynamicNodeMockRecorder) Bounds() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Bounds", reflect.TypeOf((*MockDynamicNode)(nil).Bounds))
+}
+
+// Draw mocks base method
+func (m *MockDynamicNode) Draw() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Draw")
+}
+
+// Draw indicates an expected call of Draw
+func (mr *MockDynamicNodeMockRecorder) Draw() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Draw", reflect.TypeOf((*MockDynamicNode)(nil).Draw))
+}
+
+// Update mocks base method
+func (m *MockDynamicNode) Update(delta time.Duration) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Update", delta)
+}
+
+// Update indicates an expected call of Update
+func (mr *MockDynamicNodeMockRecorder) Update(delta interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockDynamicNode)(nil).Update), delta)
+}
+
+// MockMovableNode is a mock of MovableNode interface
+type MockMovableNode struct {
+	ctrl     *gomock.Controller
+	recorder *MockMovableNodeMockRecorder
+}
+
+// MockMovableNodeMockRecorder is the mock recorder for MockMovableNode
+type MockMovableNodeMockRecorder struct {
+	mock *MockMovableNode
+}
+
+// NewMockMovableNode creates a new mock instance
+func NewMockMovableNode(ctrl *gomock.Controller) *MockMovableNode {
+	mock := &MockMovableNode{ctrl: ctrl}
+	mock.recorder = &MockMovableNodeMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use
+func (m *MockMovableNode) EXPECT() *MockMovableNodeMockRecorder {
+	return m.recorder
+}
+
+// Bounds mocks base method
+func (m *MockMovableNode) Bounds() image.Rectangle {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Bounds")
+	ret0, _ := ret[0].(image.Rectangle)
+	return ret0
+}
+
+// Bounds indicates an expected call of Bounds
+func (mr *MockMovableNodeMockRecorder) Bounds() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Bounds", reflect.TypeOf((*MockMovableNode)(nil).Bounds))
+}
+
+// Draw mocks base method
+func (m *MockMovableNode) Draw() {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Draw")
+}
+
+// Draw indicates an expected call of Draw
+func (mr *MockMovableNodeMockRecorder) Draw() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Draw", reflect.TypeOf((*MockMovableNode)(nil).Draw))
+}
+
+// Update mocks base method
+func (m *MockMovableNode) Update(delta time.Duration) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "Update", delta)
+}
+
+// Update indicates an expected call of Update
+func (mr *MockMovableNodeMockRecorder) Update(delta interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Update", reflect.TypeOf((*MockMovableNode)(nil).Update), delta)
+}
+
+// Velocity mocks base method
+func (m *MockMovableNode) Velocity() image.Point {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Velocity")
+	ret0, _ := ret[0].(image.Point)
+	return ret0
+}
+
+// Velocity indicates an expected call of Velocity
+func (mr *MockMovableNodeMockRecorder) Velocity() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Velocity", reflect.TypeOf((*MockMovableNode)(nil).Velocity))
+}
+
+// UpdatePosition mocks base method
+func (m *MockMovableNode) UpdatePosition(arg0 image.Point) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "UpdatePosition", arg0)
+}
+
+// UpdatePosition indicates an expected call of UpdatePosition
+func (mr *MockMovableNodeMockRecorder) UpdatePosition(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdatePosition", reflect.TypeOf((*MockMovableNode)(nil).UpdatePosition), arg0)
 }
