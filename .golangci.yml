@@ -61,3 +61,5 @@ linters:
 linters-settings:
   lll:
     line-length: 110
+  goimports:
+    local-prefixes: github.com/kulti/zounds
