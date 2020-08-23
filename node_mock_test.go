@@ -6,7 +6,7 @@ package zounds_test
 
 import (
 	gomock "github.com/golang/mock/gomock"
-	image "image"
+	zounds "github.com/kulti/zounds"
 	reflect "reflect"
 	time "time"
 )
@@ -35,10 +35,10 @@ func (m *MockStaticNode) EXPECT() *MockStaticNodeMockRecorder {
 }
 
 // Bounds mocks base method
-func (m *MockStaticNode) Bounds() image.Rectangle {
+func (m *MockStaticNode) Bounds() zounds.Rectangle {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Bounds")
-	ret0, _ := ret[0].(image.Rectangle)
+	ret0, _ := ret[0].(zounds.Rectangle)
 	return ret0
 }
 
@@ -84,10 +84,10 @@ func (m *MockDynamicNode) EXPECT() *MockDynamicNodeMockRecorder {
 }
 
 // Bounds mocks base method
-func (m *MockDynamicNode) Bounds() image.Rectangle {
+func (m *MockDynamicNode) Bounds() zounds.Rectangle {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Bounds")
-	ret0, _ := ret[0].(image.Rectangle)
+	ret0, _ := ret[0].(zounds.Rectangle)
 	return ret0
 }
 
@@ -145,10 +145,10 @@ func (m *MockMovableNode) EXPECT() *MockMovableNodeMockRecorder {
 }
 
 // Bounds mocks base method
-func (m *MockMovableNode) Bounds() image.Rectangle {
+func (m *MockMovableNode) Bounds() zounds.Rectangle {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Bounds")
-	ret0, _ := ret[0].(image.Rectangle)
+	ret0, _ := ret[0].(zounds.Rectangle)
 	return ret0
 }
 
@@ -183,10 +183,10 @@ func (mr *MockMovableNodeMockRecorder) Update(delta interface{}) *gomock.Call {
 }
 
 // Velocity mocks base method
-func (m *MockMovableNode) Velocity() image.Point {
+func (m *MockMovableNode) Velocity() zounds.Point {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Velocity")
-	ret0, _ := ret[0].(image.Point)
+	ret0, _ := ret[0].(zounds.Point)
 	return ret0
 }
 
@@ -197,7 +197,7 @@ func (mr *MockMovableNodeMockRecorder) Velocity() *gomock.Call {
 }
 
 // UpdatePosition mocks base method
-func (m *MockMovableNode) UpdatePosition(arg0 image.Point) {
+func (m *MockMovableNode) UpdatePosition(arg0 zounds.Point) {
 	m.ctrl.T.Helper()
 	m.ctrl.Call(m, "UpdatePosition", arg0)
 }

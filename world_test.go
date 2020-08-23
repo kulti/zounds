@@ -1,7 +1,6 @@
 package zounds_test
 
 import (
-	"image"
 	"strconv"
 	"testing"
 	"time"
@@ -34,7 +33,7 @@ func (s *WorldSuite) TearDownTest() {
 }
 
 func (s *WorldSuite) TestWorldDrawOrder() {
-	node1Rect := image.Rectangle{Max: image.Point{nodeWidth, nodeHeight}}
+	node1Rect := zounds.Rectangle{Max: zounds.Point{nodeWidth, nodeHeight}}
 	node2Rect := node1Rect
 	node2Rect.Min.X++
 	node2Rect.Max.X++
@@ -76,7 +75,7 @@ func (s *WorldSuite) TestWorldDrawOrder() {
 }
 
 func (s *WorldSuite) TestWorldDrawOrderEqualNodes() {
-	node1Rect := image.Rectangle{Max: image.Point{nodeWidth, nodeHeight}}
+	node1Rect := zounds.Rectangle{Max: zounds.Point{nodeWidth, nodeHeight}}
 	node2Rect := node1Rect
 
 	node1 := NewMockStaticNode(s.mockCtl)
@@ -120,13 +119,13 @@ func (s *WorldSuite) TestDynamicNodeUpdateDelta() {
 }
 
 func (s *WorldSuite) TestWorldMovableNodeVelocity() {
-	initRect := image.Rect(nodeWidth, nodeHeight, 2*nodeWidth, 2*nodeHeight)
+	initRect := zounds.Rect(nodeWidth, nodeHeight, 2*nodeWidth, 2*nodeHeight)
 	node := NewMockMovableNode(s.mockCtl)
 
 	node.EXPECT().Bounds().Return(initRect).AnyTimes()
 	s.world.AddMovableNode(node)
 
-	checkVelocity := func(velocity image.Point) {
+	checkVelocity := func(velocity zounds.Point) {
 		expectedRect := initRect.Add(velocity)
 		node.EXPECT().Update(gomock.Any())
 		node.EXPECT().Velocity().Return(velocity)
@@ -135,20 +134,20 @@ func (s *WorldSuite) TestWorldMovableNodeVelocity() {
 	}
 
 	s.Run("vx", func() {
-		checkVelocity(image.Point{3, 0})
+		checkVelocity(zounds.Point{3, 0})
 	})
 
 	s.Run("vy", func() {
-		checkVelocity(image.Point{0, 2})
+		checkVelocity(zounds.Point{0, 2})
 	})
 
 	s.Run("diag", func() {
-		checkVelocity(image.Point{-1, -5})
+		checkVelocity(zounds.Point{-1, -5})
 	})
 
 	s.Run("zero", func() {
 		node.EXPECT().Update(gomock.Any())
-		node.EXPECT().Velocity().Return(image.Point{})
+		node.EXPECT().Velocity().Return(zounds.Point{})
 		s.world.Update()
 	})
 }
@@ -156,29 +155,29 @@ func (s *WorldSuite) TestWorldMovableNodeVelocity() {
 type MovableNodeStub struct {
 	*MockDynamicNode
 	zounds.FixedSizeNode
-	velocity image.Point
+	velocity zounds.Point
 }
 
-func (n MovableNodeStub) Bounds() image.Rectangle {
+func (n MovableNodeStub) Bounds() zounds.Rectangle {
 	return n.FixedSizeNode.Bounds()
 }
 
-func (n MovableNodeStub) Velocity() image.Point {
+func (n MovableNodeStub) Velocity() zounds.Point {
 	return n.velocity
 }
 
 func (s *WorldSuite) TestWorldMoveNodeChangesDrawOrder() {
 	var movableNode *MovableNodeStub
 	staticNodes := make([]*MockStaticNode, 0, 4)
-	startRect := image.Rect(nodeWidth, nodeHeight, 2*nodeWidth, 2*nodeHeight)
+	startRect := zounds.Rect(nodeWidth, nodeHeight, 2*nodeWidth, 2*nodeHeight)
 
 	for i := 5; i > 0; i-- {
-		rect := startRect.Add(image.Point{0, i * 5})
+		rect := startRect.Add(zounds.Point{0, float64(i) * 5})
 		if i == 3 {
 			movableNode = &MovableNodeStub{
 				MockDynamicNode: NewMockDynamicNode(s.mockCtl),
 				FixedSizeNode:   zounds.NewFixedSizeNode(rect),
-				velocity:        image.Point{0, -3},
+				velocity:        zounds.Point{0, -3},
 			}
 			movableNode.EXPECT().Bounds().Return(rect).AnyTimes()
 			movableNode.EXPECT().Update(gomock.Any()).AnyTimes()
@@ -192,17 +191,17 @@ func (s *WorldSuite) TestWorldMoveNodeChangesDrawOrder() {
 	}
 
 	testSteps := []struct {
-		velocity  image.Point
+		velocity  zounds.Point
 		mvNodePos int
 	}{
-		{image.Point{0, 0}, 2},
-		{image.Point{0, -4}, 2},
-		{image.Point{0, -2}, 3},
-		{image.Point{0, -5}, 4},
-		{image.Point{0, 11}, 2},
-		{image.Point{0, 4}, 2},
-		{image.Point{0, 2}, 1},
-		{image.Point{0, 5}, 0},
+		{zounds.Point{0, 0}, 2},
+		{zounds.Point{0, -4}, 2},
+		{zounds.Point{0, -2}, 3},
+		{zounds.Point{0, -5}, 4},
+		{zounds.Point{0, 11}, 2},
+		{zounds.Point{0, 4}, 2},
+		{zounds.Point{0, 2}, 1},
+		{zounds.Point{0, 5}, 0},
 	}
 
 	for _, step := range testSteps {
