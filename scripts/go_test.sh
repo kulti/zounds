@@ -1,7 +1,13 @@
 # /bin/bash
 set -e -o pipefail
 
-PACKAGES=$(go list -f '{{.Name}} {{.Dir}} {{.ImportPath}} {{.TestGoFiles}}{{.XTestGoFiles}}' ./...)
+IGNORE_PACKAGES="\
+    github.com/kulti/zounds/ebiten
+"
+
+PACKAGES_FILTER=$(echo ${IGNORE_PACKAGES} | sed -e 's/ /|/g')
+
+PACKAGES=$(go list -f '{{.Name}} {{.Dir}} {{.ImportPath}} {{.TestGoFiles}}{{.XTestGoFiles}}' ./... | grep -v -E "${PACKAGES_FILTER}")
 
 ALL_PACKAGES=""
 IFS_BACKUP=${IFS}
