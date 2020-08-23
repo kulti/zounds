@@ -1,7 +1,6 @@
 package zounds_test
 
 import (
-	"image"
 	"math/rand"
 	"testing"
 
@@ -13,7 +12,7 @@ import (
 func TestFixSizedNode(t *testing.T) {
 	t.Parallel()
 
-	randomRect := image.Rect(rand.Int(), rand.Int(), rand.Int(), rand.Int()) //nolint:gosec
+	randomRect := zounds.Rect(rand.Float64(), rand.Float64(), rand.Float64(), rand.Float64()) //nolint:gosec
 	node := zounds.NewFixedSizeNode(randomRect)
 	require.Equal(t, randomRect, node.Bounds())
 }

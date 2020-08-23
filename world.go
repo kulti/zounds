@@ -1,7 +1,6 @@
 package zounds
 
 import (
-	"image"
 	"sort"
 	"time"
 
@@ -12,7 +11,7 @@ import (
 // StaticNode can be only drawn.
 // StaticNode cannot be updated by the World.
 type StaticNode interface {
-	Bounds() image.Rectangle
+	Bounds() Rectangle
 	Draw()
 }
 
@@ -32,8 +31,8 @@ type DynamicNode interface {
 // and pass new Min.X, Min.Y by UpdatePosition.
 type MovableNode interface {
 	DynamicNode
-	Velocity() image.Point
-	UpdatePosition(image.Point)
+	Velocity() Point
+	UpdatePosition(Point)
 }
 
 // World represents world base struct.
@@ -128,7 +127,7 @@ func (w *World) Update() {
 	}
 }
 
-func (w *World) searchInsertNodePosition(nodeBounds image.Rectangle) int {
+func (w *World) searchInsertNodePosition(nodeBounds Rectangle) int {
 	return sort.Search(len(w.nodes), func(i int) bool {
 		return (nodeBounds.Max.Y > w.nodes[i].Bounds().Max.Y) ||
 			(nodeBounds.Max.Y == w.nodes[i].Bounds().Max.Y && nodeBounds.Max.X > w.nodes[i].Bounds().Max.X)
