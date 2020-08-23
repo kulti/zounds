@@ -129,7 +129,7 @@ func (w *World) Update() {
 
 func (w *World) searchInsertNodePosition(nodeBounds Rectangle) int {
 	return sort.Search(len(w.nodes), func(i int) bool {
-		return (nodeBounds.Max.Y > w.nodes[i].Bounds().Max.Y) ||
-			(nodeBounds.Max.Y == w.nodes[i].Bounds().Max.Y && nodeBounds.Max.X > w.nodes[i].Bounds().Max.X)
+		return (nodeBounds.Max.Y < w.nodes[i].Bounds().Max.Y) ||
+			(nodeBounds.Max.Y == w.nodes[i].Bounds().Max.Y && nodeBounds.Max.X < w.nodes[i].Bounds().Max.X)
 	})
 }
