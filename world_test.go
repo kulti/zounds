@@ -69,7 +69,7 @@ func (s *WorldSuite) TestWorldDrawOrder() {
 				w.AddStaticNode(node)
 			}
 
-			checkDrawOrder(w, bkgNode.EXPECT(), node3.EXPECT(), node2.EXPECT(), node1.EXPECT())
+			checkDrawOrder(w, bkgNode.EXPECT(), node1.EXPECT(), node2.EXPECT(), node3.EXPECT())
 		})
 	}
 }
@@ -171,9 +171,9 @@ func (s *WorldSuite) TestWorldMoveNodeChangesDrawOrder() {
 	staticNodes := make([]*MockStaticNode, 0, 4)
 	startRect := zounds.Rect(nodeWidth, nodeHeight, 2*nodeWidth, 2*nodeHeight)
 
-	for i := 5; i > 0; i-- {
+	for i := 0; i < 5; i++ {
 		rect := startRect.Add(zounds.Point{0, float64(i) * 5})
-		if i == 3 {
+		if i == 2 {
 			movableNode = &MovableNodeStub{
 				MockDynamicNode: NewMockDynamicNode(s.mockCtl),
 				FixedSizeNode:   zounds.NewFixedSizeNode(rect),
@@ -196,18 +196,18 @@ func (s *WorldSuite) TestWorldMoveNodeChangesDrawOrder() {
 	}{
 		{zounds.Point{0, 0}, 2},
 		{zounds.Point{0, -4}, 2},
-		{zounds.Point{0, -2}, 3},
-		{zounds.Point{0, -5}, 4},
+		{zounds.Point{0, -2}, 1},
+		{zounds.Point{0, -5}, 0},
 		{zounds.Point{0, 11}, 2},
 		{zounds.Point{0, 4}, 2},
-		{zounds.Point{0, 2}, 1},
-		{zounds.Point{0, 5}, 0},
+		{zounds.Point{0, 2}, 3},
+		{zounds.Point{0, 5}, 4},
 	}
 
 	for _, step := range testSteps {
 		drawRecorders := make([]drawRecorder, 5)
 		staticNodesIndex := 0
-		for i := range drawRecorders {
+		for i := 0; i < len(drawRecorders); i++ {
 			if i == step.mvNodePos {
 				drawRecorders[i] = movableNode.EXPECT()
 			} else {
@@ -234,7 +234,6 @@ func checkDrawOrder(w *zounds.World, drawRecorders ...drawRecorder) {
 		} else {
 			prevCall = rec.Draw().After(prevCall)
 		}
-		// rec.Draw()
 	}
 	w.Draw()
 }
